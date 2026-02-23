@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Ultra Premium Agency</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700;800&display=swap" rel="stylesheet" />
+
+<style>
+:root{
+    --accent:#00ffdd;
+    --bg-dark:#9e588d;
+    --bg-light:#f4f7fb;
+    --text-dark:#ffffff;
+    --text-light:#0b0f19;
+}
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
+body{
+    background:var(--bg-dark);
+    color:var(--text-dark);
+    transition:.4s;
+    overflow-x:hidden;
+}
+
+body.light{
+    background:var(--bg-light);
+    color:var(--text-light);
+}
+
+/* Background Animation */
+.bg-animation span{
+    position:absolute;
+    border-radius:50%;
+    filter:blur(120px);
+    opacity:.4;
+    animation:float 14s infinite alternate ease-in-out;
+}
+.bg-animation span:nth-child(1){
+    width:500px;height:500px;background:#17dac0;top:-150px;left:-150px;
+}
+.bg-animation span:nth-child(2){
+    width:450px;height:450px;background:#862ccf;bottom:-150px;right:-150px;
+}
+@keyframes float{
+    from{transform:translateY(0);}
+    to{transform:translateY(80px);}
+}
+
+/* Hero */
+.hero{
+    text-align:center;
+    padding:120px 20px 80px;
+}
+.hero h1{
+    font-size:60px;
+    font-weight:800;
+    background:linear-gradient(90deg,#00f5d4,#9d4edd);
+    -webkit-background-clip:text;
+    color:transparent;
+}
+.hero p{
+    margin-top:20px;
+    font-size:18px;
+    opacity:.8;
+}
+
+/* Toggle */
+.controls{
+    position:fixed;
+    top:20px;
+    right:20px;
+}
+.controls button{
+    padding:10px 15px;
+    border:none;
+    border-radius:30px;
+    cursor:pointer;
+}
+
+/* Pricing toggle */
+.toggle-pricing{
+    text-align:center;
+    margin-bottom:60px;
+}
+.toggle-pricing button{
+    margin:0 5px;
+    padding:10px 25px;
+    border-radius:30px;
+    border:none;
+    cursor:pointer;
+}
+.active-toggle{
+    background:var(--accent);
+    color:#000;
+}
+
+/* Container */
+.container{
+    max-width:1300px;
+    margin:auto;
+    padding:40px 20px 100px;
+}
+
+/* Row system */
+.row{
+    display:grid;
+    gap:40px;
+    margin-bottom:60px;
+}
+.row-3{
+    grid-template-columns:repeat(3,1fr);
+}
+.row-2{
+    grid-template-columns:repeat(2,1fr);
+    max-width:900px;
+    margin-left:auto;
+    margin-right:auto;
+}
+
+/* Cards */
+.card{
+    padding:40px;
+    border-radius:28px;
+    backdrop-filter:blur(25px);
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    transition:.4s;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+}
+.card:hover{
+    transform:translateY(-15px);
+    box-shadow:0 0 50px rgba(0,245,212,.5);
+}
+.card h2{font-size:22px;}
+.price{
+    font-size:32px;
+    margin:18px 0;
+    color:var(--accent);
+    font-weight:700;
+}
+.features{
+    font-size:14px;
+    line-height:1.9;
+    margin-bottom:30px;
+    opacity:.9;
+}
+
+/* Featured */
+.featured{
+    border:2px solid var(--accent);
+    box-shadow:0 0 60px rgba(0,245,212,.4);
+    transform:scale(1.05);
+    position:relative;
+}
+.featured::before{
+    content:"MOST POPULAR";
+    position:absolute;
+    top:-14px;
+    right:25px;
+    background:var(--accent);
+    color:#000;
+    font-size:12px;
+    padding:6px 15px;
+    border-radius:20px;
+    font-weight:700;
+}
+
+/* Buttons */
+.btn-group{
+    display:flex;
+    gap:10px;
+}
+.btn{
+    flex:1;
+    padding:13px;
+    border-radius:30px;
+    border:none;
+    font-weight:600;
+    cursor:pointer;
+    transition:.3s;
+}
+.preview{background:#fff;color:#000;}
+.order{background:var(--accent);color:#000;}
+.order:hover{box-shadow:0 0 25px var(--accent);}
+
+/* Reveal Animation */
+.reveal{
+    opacity:0;
+    transform:translateY(50px);
+    transition:1s;
+}
+.reveal.active{
+    opacity:1;
+    transform:translateY(0);
+}
+
+footer{
+    text-align:center;
+    padding:60px 20px;
+    opacity:.6;
+}
+
+/* Responsive */
+@media(max-width:1024px){
+.row-3{grid-template-columns:repeat(2,1fr);}
+.row-2{grid-template-columns:repeat(2,1fr);max-width:100%;}
+}
+@media(max-width:768px){
+.hero h1{font-size:38px;}
+.row-3,.row-2{grid-template-columns:1fr;}
+}
+</style>
+</head>
+<body>
+
+<div class="bg-animation">
+<span></span>
+<span></span>
+</div>
+
+<div class="controls">
+<button onclick="toggleMode()">🌙</button>
+</div>
+
+<section class="hero">
+<h1>Build High-Converting Landing Pages</h1>
+<p>Ultra Premium Agency Experience • Modern • Fast • Scalable</p>
+</section>
+
+<div class="toggle-pricing">
+<button id="monthlyBtn" class="active-toggle" onclick="setPricing('monthly')">Bulanan</button>
+<button id="yearlyBtn" onclick="setPricing('yearly')">Tahunan</button>
+</div>
+
+<div class="container">
+
+<!-- ROW 1 -->
+<div class="row row-3">
+
+<div class="card reveal">
+<h2>Paket Hemat Ibu Cerdas</h2>
+<div class="price" data-month="499K" data-year="399K">Rp 300.000</div>
+<div class="features">
+✔ Desain sederhana mudah dipahami<br>
+✔ fokus pemesanan melalui WhatsApp<br>
+✔ Header dan judul utama<br>
+✔ deskripsi singkat produk<br>
+✔ foto produk (3–5 gambar)
+</div>
+<div class="btn-group">
+<button class="btn preview" onclick="window.open('https://nisa-collab.github.io/paket_1/', '_blank')">Preview</button>
+<button class="btn order" onclick="orderNow('Paket Hemat Ibu Cerdas')">Pesan</button>
+</div>
+</div>
+
+<div class="card reveal">
+<h2>Paket Usaha Rumahan</h2>
+<div class="price" data-month="1499K" data-year="1199K">Rp 500.000</div>
+<div class="features">
+✔ dilengkapi testimoni pelanggan<br>
+✔ Header dan CTA<br>
+✔ deskripsi produk<br>
+✔ keunggulan produk<br>
+✔ testimoni<br>
+✔ tombol WhatsApp
+</div>
+<div class="btn-group">
+<button class="btn preview" onclick="window.open('https://nisa-collab.github.io/paket_2/', '_blank')">Preview</button>
+<button class="btn order" onclick="orderNow('Paket Usaha Rumahan')">Pesan</button>
+</div>
+</div>
+
+<div class="card reveal">
+<h2>Paket Keluarga Produktif</h2>
+<div class="price" data-month="2499K" data-year="1999K">Rp 800.000</div>
+<div class="features">
+✔ Tampilan profesional<br>
+✔ mendukung branding usaha keluarga<br>
+✔ Hero section<br>
+✔ profil usaha keluarga<br>
+✔ produk/layanan<br>
+✔ testimoni<br>
+✔ kontak dan CTA
+</div>
+<div class="btn-group">
+<button class="btn preview" onclick="window.open('https://nisa-collab.github.io/paket_3/', '_blank')">Preview</button>
+<button class="btn order" onclick="orderNow('Paket Keluarga Produktif')">Pesan</button>
+</div>
+</div>
+
+</div>
+
+<!-- ROW 2 -->
+<div class="row row-2">
+
+<div class="card reveal">
+<h2>Paket Ibu UMKM</h2>
+<div class="price" data-month="3999K" data-year="3499K">Rp 1.200.000</div>
+<div class="features">
+✔ Hero dan headline<br>
+✔ masalah dan solusi<br>
+✔ detail produk<br>
+✔ testimoni<br>
+✔ FAQ<br>
+✔ CTA
+</div>
+<div class="btn-group">
+<button class="btn preview" onclick="window.open('https://nisa-collab.github.io/paket_4/', '_blank')">Preview</button>
+<button class="btn order" onclick="orderNow('Paket Ibu UMKM')">Pesan</button>
+</div>
+</div>
+
+<div class="card reveal featured">
+<h2>Paket Keluarga Mandiri Premium</h2>
+<div class="price" data-month="5999K" data-year="4999K">Rp 1.800.000</div>
+<div class="features">
+✔ Desain premium<br>
+✔ siap digunakan untuk iklan digital<br>
+✔ Hero profesional<br>
+✔ cerita brand keluarga<br>
+✔ produk/layanan<br>
+✔ benefit detail<br>
+✔ testimoni<br>
+✔ CTA dan form pemesanan
+</div>
+<div class="btn-group">
+<button class="btn preview" onclick="window.open('https://nisa-collab.github.io/paket_5/', '_blank')">Preview</button>
+<button class="btn order" onclick="orderNow('Paket Keluarga Mandiri Premium')">Pesan</button>
+</div>
+</div>
+
+</div>
+
+</div>
+
+<footer>
+© 2026 Nisa Olivia Janah | XII TKJ1
+</footer>
+
+<script>
+function toggleMode(){
+document.body.classList.toggle("light");
+}
+
+function setPricing(type){
+document.querySelectorAll(".price").forEach(el=>{
+let value = type==="monthly" ? el.dataset.month : el.dataset.year;
+el.innerText="Rp "+value;
+});
+document.getElementById("monthlyBtn").classList.toggle("active-toggle",type==="monthly");
+document.getElementById("yearlyBtn").classList.toggle("active-toggle",type==="yearly");
+}
+
+function orderNow(name){
+let phone="6281234567890";
+let msg="Halo, saya ingin memesan paket "+name+" Landing Page.";
+window.open("https://wa.me/"+phone+"?text="+encodeURIComponent(msg));
+}
+
+window.addEventListener("scroll",()=>{
+document.querySelectorAll(".reveal").forEach(el=>{
+let top=el.getBoundingClientRect().top;
+if(top<window.innerHeight-100){
+el.classList.add("active");
+}
+});
+});
+</script>
+
+</body>
+</html>
